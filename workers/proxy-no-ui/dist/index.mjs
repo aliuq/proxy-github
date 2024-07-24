@@ -1,4 +1,4 @@
-// ../../node_modules/.pnpm/regexparam@2.0.1/node_modules/regexparam/dist/index.mjs
+// ../../node_modules/.pnpm/regexparam@2.0.2/node_modules/regexparam/dist/index.mjs
 function parse(str, loose) {
   if (str instanceof RegExp)
     return { keys: false, pattern: str };
@@ -166,7 +166,7 @@ var init = (options = {}) => {
       context.robots = robotsOoverride ? robots : ["User-agent: *", "Disallow: /", ...robots];
       return n(200, context.robots.join("\n"));
     }
-    context.disablePaths = disablePathsOoverride ? disablePaths : ["/favicon.", "/sw.js", ...disablePaths];
+    context.disablePaths = disablePathsOoverride ? disablePaths : [/^\/favicon.ico/, /^\/sw.js/, ...disablePaths];
     const match = context.disablePaths.some((path) => context.url.pathname.match(path));
     if (match)
       return n(204);

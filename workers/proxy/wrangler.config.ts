@@ -37,7 +37,7 @@ async function wranglerConfig(options: WranglerConfigOptions<INTERNAL_ENV>): Pro
     main: isPublish && process.env.CF_LOADER ? `${outName}.mjs` : entry,
     compatibility_date: '2023-02-28',
     vars,
-    dev: { ip: 'localhost', port },
+    dev: { ip: '0.0.0.0', port },
     env: {
       // For local development, Do not pulish the enviroment to cloudflare.
       localhost: { vars },

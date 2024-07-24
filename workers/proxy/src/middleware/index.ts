@@ -32,7 +32,7 @@ export const init = (options: InitOptions = {}): Handler => {
     }
 
     // Disable paths
-    context.disablePaths = disablePathsOoverride ? disablePaths : ['/favicon.', '/sw.js', ...disablePaths]
+    context.disablePaths = disablePathsOoverride ? disablePaths : [/^\/favicon.ico/, /^\/sw.js/, ...disablePaths]
     const match = context.disablePaths.some((path: string | RegExp) => context.url.pathname.match(path))
     if (match)
       return reply(204)

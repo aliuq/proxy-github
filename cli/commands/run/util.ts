@@ -34,7 +34,7 @@ export class RunHandler {
   _envVarsInternal: Record<string, string> = {}
   _pkg: Record<string, any> = {}
 
-  _wranglerConfig: Function = () => {}
+  _wranglerConfig: Function = () => { }
   _wranglerConfigParsed: WranglerConfig = {} as WranglerConfig
 
   constructor(argv: RunOptions, options: CommandOptions<RunOptions>) {
@@ -464,8 +464,9 @@ async function checkRequired() {
   const spinner2 = ora('Checking Wrangler version...').start()
   const wranglerMinVer = 'v2.0.0'
   try {
-    const { stdout: ver } = await execa.execaCommand('wrangler -v')
-    if (compareVersions(ver, wranglerMinVer) === -1) {
+    const { stdout: sourceVer } = await execa.execaCommand('wrangler -v')
+    const ver = sourceVer.match(/(\d+\.\d+\.\d+)/)?.[0]
+    if (ver && compareVersions(ver, wranglerMinVer) === -1) {
       spinner2.text = red(`Wrangler version must >= ${wranglerMinVer}, current is ${ver}, please upgrade it first`)
       spinner2.fail()
       process.exit(0)
@@ -474,6 +475,7 @@ async function checkRequired() {
     spinner2.succeed()
   }
   catch (error) {
+    console.log('error', error)
     spinner2.text = red('Wrangler is not installed, please install it first')
     spinner2.fail()
     process.exit(0)

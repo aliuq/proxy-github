@@ -3,7 +3,10 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@7.0.0",
+  "packageManager": "pnpm@8.7.3",
+  "engines": {
+    "node": "20.2.0"
+  },
   "scripts": {
     "cf": "tsx ./cli/index.ts",
     "lint": "eslint . --ext .js,.ts,.vue,.html,.css",

@@ -178,3 +178,4 @@ pages/
 workers/chatgpt/
 
 *.map
+.pnpm-store
